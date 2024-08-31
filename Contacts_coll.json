@@ -1,0 +1,335 @@
+{
+	"info": {
+		"_postman_id": "7598a111-fc34-4c10-bd61-c036b9a7f0b5",
+		"name": "ContactsAPIs-Workflow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8905117"
+	},
+	"item": [
+		{
+			"name": "1-CreateAUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"const contactID = response._id;\r",
+							"\r",
+							"console.log(\"contact ID is \" + contactID);\r",
+							"//store id at local variable\r",
+							"pm.variables.set(\"contact_ID\", contactID);\r",
+							"\r",
+							"//Test1\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{contact_tokenID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"birthdate\": \"1970-01-01\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"phone\": \"8005555555\",\r\n    \"street1\": \"1 Main St.\",\r\n    \"street2\": \"Apartment A\",\r\n    \"city\": \"Anytown\",\r\n    \"stateProvince\": \"KS\",\r\n    \"postalCode\": \"12345\",\r\n    \"country\": \"USA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/contacts",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2-GetAUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test1\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{contact_tokenID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/contacts/{{contact_ID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts",
+						"{{contact_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3-UpdateAUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test1\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{contact_tokenID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"phone\": \"9999999999\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/contacts/{{contact_ID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts",
+						"{{contact_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4-DeleteAUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test1\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{contact_tokenID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/contacts/{{contact_ID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts",
+						"{{contact_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5-GETAUSER",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test1\r",
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{contact_tokenID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/contacts/{{contact_ID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"contacts",
+						"{{contact_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tokenAPI",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"apitest3@gmail.com\",\r\n    \"password\": \"apitest@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/users/login",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"//get a Token id fron tokenapi response\r",
+					"pm.sendRequest({\r",
+					"    url: pm.collectionVariables.get(\"baseURL\") + '/users/login',\r",
+					"    method: 'POST',\r",
+					"    header: {\r",
+					"             \"Content-Type\" : \"application/json\"\r",
+					"    },\r",
+					"    body:{\r",
+					"        mode: 'raw',\r",
+					"        raw: JSON.stringify({\r",
+					"                            \"email\": pm.collectionVariables.get(\"email\"),\r",
+					"                            \"password\": pm.collectionVariables.get(\"password\")\r",
+					"        })\r",
+					"    }\r",
+					"}, function(error, response){\r",
+					"    if(error)\r",
+					"    {\r",
+					"        console.log(error);\r",
+					"    }\r",
+					"    else{\r",
+					"       const responsebody = JSON.parse(response.text());\r",
+					"       const tokenidn = responsebody.token;\r",
+					"       console.log(\"contacts api token id --> \" +tokenidn);\r",
+					"       pm.variables.set(\"contact_tokenID\", tokenidn);\r",
+					"    }\r",
+					"}\r",
+					")"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.test(\"Response time is less than 3000ms\", function () {\r",
+					"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "https://thinking-tester-contact-list.herokuapp.com",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": "apitest3@gmail.com",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "apitest@123",
+			"type": "string"
+		}
+	]
+}
