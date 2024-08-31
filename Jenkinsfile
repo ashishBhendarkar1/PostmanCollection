@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Run api test cases') {
             steps {
-                bat 'newman run ./sample_coll.json.json  -e ./sample_env.json.json -n 1 -r htmlextra,cli --reporter-htmlextra-export ./results/booking_report.html'
+                bat 'newman run ./sample_coll.json  -e ./sample_env.json -n 1 -r htmlextra,cli --reporter-htmlextra-export ./results/booking_report.html'
             }
         }
         stage('Publish HTML Extra Report'){
